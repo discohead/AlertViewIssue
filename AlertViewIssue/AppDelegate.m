@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Mixpanel/Mixpanel.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +17,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:@"4273def7ede898606e72925316938d92"];
+    [mixpanel identify:mixpanel.distinctId];
+    [mixpanel.people setOnce:@{@"$created":[NSDate date]}];
+    
     return YES;
 }
 
